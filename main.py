@@ -10,6 +10,7 @@ API = "https://www.tateapi.com/api/quote"
 # TODO Get icon 🟩
 # TODO add formatting
 
+
 # FUNCTIONS 
 
 # tk Functions
@@ -17,8 +18,8 @@ def new_quote():
     # API 
     get_raw_quote = requests.get(API)
     raw_quote = get_raw_quote.json()["quote"]
-    sub_question = re.sub("\? ", "?\n", raw_quote)  # break on ?
-    sub_period = re.sub("\. ", ".\n", sub_question)  # break on .
+    sub_question = re.sub(r"\? ", "?\n", raw_quote)  # break on ?
+    sub_period = re.sub(r"\. ", ".\n", sub_question)  # break on .
     print(sub_period)
     print(len(sub_period))
 
@@ -34,21 +35,25 @@ def new_quote():
     print(sub_period)
     print(split_sentance)
 
-    compiled = ''
 
-    for sentance in split_sentance:
-        half_of_sentance = len(sentance) // 2
-        if len(sentance) > 50:
-            while sentance[half_of_sentance] != " ":
-                half_of_sentance -= 1
-            sentance = sentance[:half_of_sentance + 1] + "\n" + sentance[half_of_sentance + 1:]
-        compiled += sentance + "\n"
+    def len_check(input):
+        compiled = ''
+        for sentance in input:
+            if len(sentance) > 50:
+                half_of_sentance = len(sentance) // 2
+                while sentance[half_of_sentance] != " ":
+                    half_of_sentance -= 1
+                sentance = sentance[:half_of_sentance + 1] + "\n" + sentance[half_of_sentance + 1:]
+            compiled += sentance + "\n"
+        return compiled
 
-    #background.configure(text=compiled)
-
+    compiled = len_check(split_sentance)
+    tate_img_canvas.itemconfigure(canvas_text, text=compiled) # 👀 dynamically configure 
     print(compiled)
 
 # APPEARANCE
+
+QUOTE_FONT = ("nirmala ui semilight", 20, "normal")
 
 # Appearance Mode
 customtkinter.set_appearance_mode("Dark")
@@ -76,6 +81,7 @@ tate_chess_tk = ImageTk.PhotoImage(tate_chess_pil)
 tate_img_canvas = tkinter.Canvas(root, width=512, height=640, highlightthickness=0)
 tate_img_canvas.grid(column=0, row=0, rowspan=8, columnspan=8)
 tate_img_canvas.create_image(512/2, 640/2, image=tate_chess_tk)
+canvas_text = tate_img_canvas.create_text(512/2, 640/2, text='', font=QUOTE_FONT, fill="white")
 
 #background = customtkinter.CTkLabel(image=tate_chess, master=root, text='')
 #background.grid(column=0, row=0, rowspan=8, columnspan=8)
