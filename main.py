@@ -1,5 +1,5 @@
 import tkinter, customtkinter, requests
-from PIL import Image
+from PIL import Image, ImageTk, ImageOps
 import re
 
 # API 
@@ -44,7 +44,7 @@ def new_quote():
             sentance = sentance[:half_of_sentance + 1] + "\n" + sentance[half_of_sentance + 1:]
         compiled += sentance + "\n"
 
-    background.configure(text=compiled)
+    #background.configure(text=compiled)
 
     print(compiled)
 
@@ -66,13 +66,21 @@ root.title("Andrew Tate Quotes")
 
 
 # IMAGE 
-
-
 tate_chess = customtkinter.CTkImage(dark_image=Image.open("images/andrew_chess.jpg"), size=(512, 640))  # 1024, 1280  # w, l
-background = customtkinter.CTkLabel(image=tate_chess, master=root, text='')
-background.grid(column=0, row=0, rowspan=8, columnspan=8)
+tate_chess_pil = Image.open("images/andrew_chess.jpg")
+tate_chess_pil = ImageOps.scale(tate_chess_pil, factor=0.5)
+tate_chess_tk = ImageTk.PhotoImage(tate_chess_pil)
 
-background.configure(text='', font=("nirmala ui semilight", 20, "normal"))  # hardcode
+
+# CANVAS
+tate_img_canvas = tkinter.Canvas(root, width=512, height=640, highlightthickness=0)
+tate_img_canvas.grid(column=0, row=0, rowspan=8, columnspan=8)
+tate_img_canvas.create_image(512/2, 640/2, image=tate_chess_tk)
+
+#background = customtkinter.CTkLabel(image=tate_chess, master=root, text='')
+#background.grid(column=0, row=0, rowspan=8, columnspan=8)
+
+#background.configure(text='', font=("nirmala ui semilight", 20, "normal"))  # hardcode
 
 # BUTTON 
 quote_button = customtkinter.CTkButton(
