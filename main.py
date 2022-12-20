@@ -1,55 +1,45 @@
 import tkinter, customtkinter, requests
 from PIL import Image, ImageTk, ImageOps
 import re
-
+from wills_filter_funcs import len_clean, add_linebreaks_even
+import time
 # API 
 API = "https://www.tateapi.com/api/quote"
 
 # CHECKLIST 
 # TODO Place code in Classes 🟩
 # TODO Get icon 🟩
-# TODO add formatting
+# TODO add formatting 
+    # version 1.0 ✅
+    # add 'copywrite' style space function - check
+    # add a function to roughly divide strings in two with optional recursive functionality - check
+    # version 1.1
+    # add "averages" filter func 🟩
+    # add only doubles for sentances longer than a given value 🟩
 
 
 # FUNCTIONS 
 
 # tk Functions
 def new_quote():
-    # API 
+    rec = time.time()
+    # string format functions 
+
+    # GET API 
     get_raw_quote = requests.get(API)
     raw_quote = get_raw_quote.json()["quote"]
-    sub_question = re.sub(r"\? ", "?\n", raw_quote)  # break on ?
-    sub_period = re.sub(r"\. ", ".\n", sub_question)  # break on .
+    print(raw_quote, get_raw_quote.json())
+    sub_period = len_clean(raw_quote, doubles=True)
     print(sub_period)
+   
     print(len(sub_period))
-
-    # if len > 
-    # check for commas
-    # if not check for space
-    # repeat
-
-    find_first_break = sub_period.find("\n")
-    half_of_len = len(sub_period[find_first_break]) // 2
-
-    split_sentance = sub_period.splitlines(True)
-    print(sub_period)
-    print(split_sentance)
+    compiled = add_linebreaks_even(sub_period, recursive=True, length=40)
 
 
-    def len_check(input):
-        compiled = ''
-        for sentance in input:
-            if len(sentance) > 50:
-                half_of_sentance = len(sentance) // 2
-                while sentance[half_of_sentance] != " ":
-                    half_of_sentance -= 1
-                sentance = sentance[:half_of_sentance + 1] + "\n" + sentance[half_of_sentance + 1:]
-            compiled += sentance + "\n"
-        return compiled
-
-    compiled = len_check(split_sentance)
-    tate_img_canvas.itemconfigure(canvas_text, text=compiled) # 👀 dynamically configure 
+        
+    tate_img_canvas.itemconfigure(canvas_text, text=compiled.strip()) # 👀 dynamically configure 
     print(compiled)
+    print(f"speed: {time.time() - rec}")
 
 # APPEARANCE
 
@@ -80,8 +70,8 @@ tate_chess_tk = ImageTk.PhotoImage(tate_chess_pil)
 # CANVAS
 tate_img_canvas = tkinter.Canvas(root, width=512, height=640, highlightthickness=0)
 tate_img_canvas.grid(column=0, row=0, rowspan=8, columnspan=8)
-tate_img_canvas.create_image(512/2, 640/2, image=tate_chess_tk)
-canvas_text = tate_img_canvas.create_text(512/2, 640/2, text='', font=QUOTE_FONT, fill="white")
+tate_img_canvas.create_image(256, 320, image=tate_chess_tk)
+canvas_text = tate_img_canvas.create_text(256, 450, text='', font=QUOTE_FONT, fill="white", anchor="s", justify="center")
 
 #background = customtkinter.CTkLabel(image=tate_chess, master=root, text='')
 #background.grid(column=0, row=0, rowspan=8, columnspan=8)
