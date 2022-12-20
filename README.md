@@ -2,6 +2,7 @@
 ## Also known as: TATE-PI
 Andrew Tate Quotes app made from Andrew Tate REST API 
 
+<details>
 <todo><h3>Todo:</h3><todo/>
 1.1
 Clean up string-filter functions I developed 🟩
