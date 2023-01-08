@@ -1,8 +1,8 @@
 import tkinter, customtkinter, requests
 from PIL import Image, ImageTk, ImageOps
-import re
-from wills_filter_funcs import len_clean, add_linebreaks_even
 import time
+from FormatFuncs import push
+
 # API 
 API = "https://www.tateapi.com/api/quote"
 
@@ -29,21 +29,15 @@ def new_quote():
     get_raw_quote = requests.get(API)
     raw_quote = get_raw_quote.json()["quote"]
     print(raw_quote, get_raw_quote.json())
-    sub_period = len_clean(raw_quote, doubles=True)
-    print(sub_period)
-   
-    print(len(sub_period))
-    compiled = add_linebreaks_even(sub_period, recursive=True, length=40)
-
-
-        
-    tate_img_canvas.itemconfigure(canvas_text, text=compiled.strip()) # 👀 dynamically configure 
+    compiled = push(raw_quote, length=30, force_space=True)
     print(compiled)
+   
+    tate_img_canvas.itemconfigure(canvas_text, text=compiled) # 👀 dynamically configure 
     print(f"speed: {time.time() - rec}")
 
 # APPEARANCE
 
-QUOTE_FONT = ("nirmala ui semilight", 20, "normal")
+QUOTE_FONT = ("nirmala ui semilight", 16, "normal")
 
 # Appearance Mode
 customtkinter.set_appearance_mode("Dark")

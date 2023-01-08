@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fbca23e7-b211-4dac-9d5d-cf121771f11a" name="Changes" comment="" />
+    <list default="true" id="fbca23e7-b211-4dac-9d5d-cf121771f11a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/day_33_A_Andrew_Tate_Quotes_App.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/day_33_A_Andrew_Tate_Quotes_App.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wills_filter_funcs.py" beforeDir="false" afterPath="$PROJECT_DIR$/wills_filter_funcs.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
