@@ -2,15 +2,12 @@
 ## Also known as: TATE-PI
 Andrew Tate Quotes app made from Andrew Tate REST API 
 
-<details>
-<todo><h3>Todo:</h3><todo/>
-1.1
-Clean up string-filter functions I developed 🟩
-Add an Icon 🟩
-Modify button color 🟩
+![](https://github.com/The-Captain-William/Andrew-Tate-Quotes/blob/main/readme%20items/Image%200.0.1.JPG?raw=true)
 
-1.2
-Add an opaque background to text if possible
+### Summary
+An exercise in OOP, this app pulls and parses text from  https://www.tateapi.com/. 
 
-Future:
-pull out string-filter functions to my own library 🟩
+#### Future Plans:
+- Import custom font and improve text wrapping
+- Develop a module that can easily talk to any API or web-scraped info of my choice and produce daily quotes
+
